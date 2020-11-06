@@ -1,7 +1,37 @@
+
+/*https://github.com/kaustubhmenon/animation-library*/
 html, body {
   margin: 0;
   padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #CBE1EF;
 }
+.headercontainer {
+  width: auto;
+  text-align: center;
+}
+.container {
+  width: auto;
+  height: 90px;
+}
+
 canvas {
   display: block;
+}
+
+.row {
+  margin-top: 50px;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

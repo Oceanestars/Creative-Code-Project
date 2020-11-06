@@ -12,6 +12,20 @@ function setup() {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
+  // console.log(firebase);
+
+  // I get an error that firebase.database() is not a function
+  
+  // var database = firebase.database();
+  // // reference to a node
+  // var ref = database.ref('scores');
+  // var data = {
+  //   mood: "happy",
+  //   hydration: "low",
+  //   sleep: 7,
+  //   funactivity: "watching tv"
+  // }
+  // ref.push(data);
 }
 
 function draw() {
