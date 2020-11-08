@@ -1,3 +1,7 @@
+//https://dev.to/desoga/connect-registration-form-to-firebase-part-2-53cb
+//https://codepen.io/CTNieves/pen/pbLGZW
+var theMood ="";
+let dataMessage;
 function setup() {
   var firebaseConfig = {
     apiKey: "AIzaSyCQwH6uhCGCSIz_JpL8Twwt3ueBrm5IVng",
@@ -12,22 +16,31 @@ function setup() {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-  // console.log(firebase);
+   dataMessage = firebase.database().ref('PersonData');
+}
+  function writeUserData(activity, water, feelings, hours) {
+    let newdataMessage = dataMessage.push();
+    newdataMessage.set({
+    funactivity: activity,
+    hydration: water,
+    mood : feelings,
+    sleep: hours
+    });
+  }
 
-  // I get an error that firebase.database() is not a function
-  
-  // var database = firebase.database();
-  // // reference to a node
-  // var ref = database.ref('scores');
-  // var data = {
-  //   mood: "happy",
-  //   hydration: "low",
-  //   sleep: 7,
-  //   funactivity: "watching tv"
-  // }
-  // ref.push(data);
+function setMood(mood){
+  theMood = mood;
+  console.log(theMood);
+}
+
+function hydration(){
+  console.log("In hydration");
+  formSubmit();
+}
+
+function formSubmit() {
+  writeUserData("read","low",theMood,"8");
 }
 
 function draw() {
-
 }
