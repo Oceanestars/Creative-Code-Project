@@ -27,3 +27,12 @@ nodemon server.js   // you can also just use npm server.js
   * Jquery - Javascript Library
   * P5.js - Javascript Library
   * Bulma- CSS Framework
+
+# To do
+ * Create multiple checkup questions
+ * Create art based on data
+ * Create a legend
+ * Deploy local server
+ * Stretch goal:
+      - Saving user's session
+      - Multiple people can do it at once
