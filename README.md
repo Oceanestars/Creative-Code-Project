@@ -1,4 +1,6 @@
-# Project description
+# Project Description
+[![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+
 I want to create a website where people can log in how they feel and that data will be stored in a database
 and then I would use that data to create some art piece that reflects the answer.
 Ideally I'd have one webpage where you enter the data and another page where you can see the art piece.
@@ -8,9 +10,9 @@ Strecth goal would be to have people be able to have an account and log in every
 Feel free to contribute by forking and doing a pull request :)
 
 # How to run this project
-To run this project you can
+To run this project you have to fork it and then clone it
 ```bash
-git clone https://github.com/Oceanestars/Creative-Code-Project.git
+git clone https://github.com/yourusername/Creative-Code-Project.git
 ```
 Then in your terminal you need to run
 ```bash
@@ -26,7 +28,7 @@ nodemon server.js   // you can also just use npm server.js
   * Firebase - database as a service
   * Jquery - Javascript Library
   * P5.js - Javascript Library
-  * Bulma- CSS Framework
+  * Bulma - CSS Framework
 
 # To do
  * Create multiple checkup questions
@@ -36,3 +38,8 @@ nodemon server.js   // you can also just use npm server.js
  * Stretch goal:
       - Saving user's session
       - Multiple people can do it at once
+
+# Credit
+ * https://dev.to/desoga/connect-registration-form-to-firebase-part-2-53cb
+ * https://codepen.io/CTNieves/pen/pbLGZW
+ * https://codepen.io/Web_Cifar/pen/PoNNEYY

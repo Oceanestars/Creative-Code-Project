@@ -24,8 +24,8 @@ canvas {
 }
 
 .column {
-  float: left;
-  width: 33.33%;
+  float: right;
+  width: 33.3%;
   text-align: center;
 }
 
@@ -45,8 +45,9 @@ div[class*=container] {
   align-items: center;
 }
 
-.container-2 { background: #CBE1EF; }
+.container-2 { background: #CBE1EF; margin-top: 50px;}
 .btn {
+  cursor: pointer;
   position: relative;
   color: white;
   width: 256px;
@@ -81,7 +82,7 @@ div[class*=container] {
 	left: 0;
 	z-index: 1;
   transition: all 0.3s;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 3px solid rgba(255, 255, 255, 0.5);
 }
 
 .btn-two:hover::after {
@@ -108,4 +109,29 @@ div[class*=container] {
 @keyframes rotateccw {
     from {transform: rotate(0deg);}
     to {transform: rotate(-360deg);}
+}
+
+.btn-normal{
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  margin-left: 30%;
+  margin-right: 30%;
+
+  color: white;
+  width: 210px;
+  height: 64px;
+  line-height: 64px;
+}
+.row2{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 50px;
+  margin-bottom: : 50px;
+}
+
+.step {
+  display: none;
+}
+.step.active {
+  display: block;
 }
