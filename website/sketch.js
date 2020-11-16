@@ -89,6 +89,7 @@ function gotData(data) {
   var keys = Object.keys(dataRetrieved);
   var theActivity = dataRetrieved[keys].funactivity;
   var theHours = dataRetrieved[keys].sleep;
+  console.log(dataRetrieved);
   console.log(theActivity, theHours);
 }
 
