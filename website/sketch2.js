@@ -1,6 +1,7 @@
 let dataMessage;
 let stats = [];
 let table = document.querySelector("table");
+var numberShapes = 0;
 
 function setup() {
   var firebaseConfig = {
@@ -19,23 +20,8 @@ function setup() {
   firebase.analytics();
   dataMessage = firebase.database().ref('PersonData');
   RetrieveData()
-  // canvas = createCanvas(500, 500);
-  // canvas.parent('drawing')
-  // // create a bunch of shapes
-  // for (let i = 0; i < 6; i++) {
-  //
-  //   shapesArray.push(new Shape(i, changeOpacity));
-  //   changeOpacity += 30;
-  //   console.log(changeOpacity);
-  // }
-}
-
-function writeUserData(activity, hours) {
-  let newdataMessage = dataMessage.push();
-  newdataMessage.set({
-    funactivity: activity,
-    sleep: hours
-  });
+  canvas = createCanvas(500, 500);
+  canvas.parent('drawing')
 }
 
 function RetrieveData() {
@@ -46,16 +32,15 @@ function gotData(data) {
   var tempDict = {}
   try {
     var dataRetrieved = data.val();
-    console.log(dataRetrieved)
     var keys = Object.keys(dataRetrieved);
-    var theActivity = dataRetrieved[keys].funactivity;
-    var theHours = dataRetrieved[keys].sleep;
-    console.log(theActivity, theHours);
+    var theActivity = dataRetrieved[keys[keys.length - 1]].funactivity; //with multiple entry keys has all the keys so the length-1 grabs me the latest entry
+    var theHours = dataRetrieved[keys[keys.length - 1]].sleep;;
     tempDict["activity"] = theActivity;
     tempDict["sleep"] = theHours;
     stats.push(tempDict);
-    let headerData = Object.keys(stats[0]);
-    console.log(stats[0]);
+    setMoodToNum(stats[0].activity);
+    printShape();
+    // Print out the latets entry in the database
     var li = createElement('li', theActivity + ' and ' + theHours);
     li.parent('displayList');
   } catch (err) {
@@ -63,72 +48,90 @@ function gotData(data) {
   }
 }
 
+function setMoodToNum(currentMood) {
+  if (currentMood == "sad") {
+    numberShapes = 5;
+  } else if (currentMood == "neutral") {
+    numberShapes = 7;
+  } else {
+    numberShapes = 9;
+  }
+}
+
+function printShape() {
+
+  for (let i = 0; i < numberShapes; i++) {
+
+    shapesArray.push(new Shape(i, changeOpacity));
+    changeOpacity += 30;
+    //console.log(changeOpacity);
+  }
+
+}
+
 function errData(err) {
   console.log(err);
 }
 
-// let isGrowing = true;
-// var buttonBoolean = null;
-// var changeOpacity = 10;
-//
-// class Shape {
-//   constructor(vertices, transparencyColor) {
-//     this.vertices = vertices;
-//     this.transparencyColor = transparencyColor;
-//     this.setPosition();
-//     this.setColor();
-//
-//   }
-//
-//   setPosition() {
-//     this.x = 200;
-//     this.y = 200;
-//     this.radius = 200;
-//   }
-//
-//   setColor() {
-//     console.log(this.transparencyColor);
-//     fill(255, 0, 0, this.transparencyColor);
-//
-//   }
-//
-//   display() {
-//     let segmentRadians = TWO_PI / this.vertices;
-//     beginShape();
-//     for (let i = 0; i < this.vertices; i++) {
-//       let x = sin(i * segmentRadians) * this.radius;
-//       let y = cos(i * segmentRadians) * this.radius;
-//       vertex(this.x + x, this.y + y);
-//
-//       if (this.radius > 200) {
-//         isGrowing = false;
-//       } else if (this.radius < -100) {
-//         isGrowing = true;
-//       }
-//       if (isGrowing == true) {
-//         this.radius += 0.25;
-//       } else if (isGrowing == false) {
-//         this.radius -= 0.25;
-//       }
-//     }
-//     endShape(CLOSE);
-//   }
-// }
-//
-// let shapesArray = [];
-// let numShapes = 0;
-//
-//
-// function draw() {
-//   background(255)
-//   translate(100, 20);
-//   ellipseMode(CENTER);
-//   rectMode(CENTER);
-//
-//   // iterate over shapes and draw to screen
-//   for (let i = 0; i < shapesArray.length; i++) {
-//     shapesArray[i].display();
-//
-//
-//   }
-// }
+let isGrowing = true;
+var buttonBoolean = null;
+var changeOpacity = 10;
+
+class Shape {
+  constructor(vertices, transparencyColor) {
+    this.vertices = vertices;
+    this.transparencyColor = transparencyColor;
+    this.setPosition();
+    this.setColor();
+  }
+
+  setPosition() {
+    this.x = 200;
+    this.y = 200;
+    this.radius = 200;
+  }
+
+  setColor() {
+    //console.log(this.transparencyColor);
+    fill(255, 0, 0, this.transparencyColor);
+  }
+
+  display() {
+    let segmentRadians = TWO_PI / this.vertices;
+    beginShape();
+    for (let i = 0; i < this.vertices; i++) {
+      let x = sin(i * segmentRadians) * this.radius;
+      let y = cos(i * segmentRadians) * this.radius;
+      vertex(this.x + x, this.y + y);
+
+      if (this.radius > 200) {
+        isGrowing = false;
+      } else if (this.radius < -100) {
+        isGrowing = true;
+      }
+      if (isGrowing == true) {
+        this.radius += 0.25;
+      } else if (isGrowing == false) {
+        this.radius -= 0.25;
+      }
+    }
+    endShape(CLOSE);
+  }
+}
+
+let shapesArray = [];
+let numShapes = 0;
+
+
+function draw() {
+  background(255)
+  translate(100, 20);
+  ellipseMode(CENTER);
+  rectMode(CENTER);
+
+  // iterate over shapes and draw to screen
+  for (let i = 0; i < shapesArray.length; i++) {
+    shapesArray[i].display();
+
+  }
+}
