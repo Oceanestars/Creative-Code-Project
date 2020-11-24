@@ -3,7 +3,7 @@ let stats = [];
 let table = document.querySelector("table");
 var numberShapes = 0;
 var p5Drawing = document.getElementById("drawing");
-var cssAnim = document.getElementById("block");
+var cssAnim = document.querySelector(".block");
 //tried visibility instead of display because of here:https://stackoverflow.com/questions/64461290/cannot-read-property-addeventlistener-of-null-when-i-move-to-other-page-in-the
 document.getElementById("button1").addEventListener("click", function() {
   p5Drawing.style.visibility = "visible";
