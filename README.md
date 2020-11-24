@@ -29,6 +29,7 @@ nodemon server.js   // you can also just use npm server.js
   * Jquery - Javascript Library
   * P5.js - Javascript Library
   * Bulma - CSS Framework
+  * SASS - CSS Extension
 
 # To do
  * Create multiple checkup questions
@@ -43,4 +44,6 @@ nodemon server.js   // you can also just use npm server.js
  * https://dev.to/desoga/connect-registration-form-to-firebase-part-2-53cb
  * https://codepen.io/CTNieves/pen/pbLGZW
  * https://codepen.io/Web_Cifar/pen/PoNNEYY
- * https://github.com/WebDevSimplified/Face-Detection-JavaScript
+ * https://codepen.io/thebabydino/pen/NNxMaN
+ * https://flaviocopes.com/css-animations/
+ * https://www.youtube.com/watch?v=Zz6eOVaaelI

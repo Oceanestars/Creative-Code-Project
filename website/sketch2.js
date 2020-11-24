@@ -2,7 +2,18 @@ let dataMessage;
 let stats = [];
 let table = document.querySelector("table");
 var numberShapes = 0;
+var p5Drawing = document.getElementById("drawing");
+var cssAnim = document.getElementById("block");
+//tried visibility instead of display because of here:https://stackoverflow.com/questions/64461290/cannot-read-property-addeventlistener-of-null-when-i-move-to-other-page-in-the
+document.getElementById("button1").addEventListener("click", function() {
+  p5Drawing.style.visibility = "visible";
+  cssAnim.style.visibility = "hidden";
+});
 
+document.getElementById("button2").addEventListener("click", function() {
+  p5Drawing.style.visibility = "hidden";
+  cssAnim.style.visibility = "visible";
+});
 function setup() {
   var firebaseConfig = {
     apiKey: "AIzaSyCQwH6uhCGCSIz_JpL8Twwt3ueBrm5IVng",
@@ -20,6 +31,7 @@ function setup() {
   firebase.analytics();
   dataMessage = firebase.database().ref('PersonData');
   RetrieveData()
+
   canvas = createCanvas(500, 500);
   canvas.parent('drawing')
 }
@@ -66,7 +78,6 @@ function printShape() {
     changeOpacity += 30;
     //console.log(changeOpacity);
   }
-
 }
 
 function errData(err) {
