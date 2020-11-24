@@ -1,8 +1,9 @@
 console.log("server is starting");
 var express = require('express');
-var app = express();
-var server = app.listen(3000, listening);
-function listening(){  //callback
-  console.log("listening...");
+const http = require('http');
+const app = express(); // Init for express
+const port = process.env.PORT || 3000
+const server = http.createServer(app); // Creation of an HTTP server
+server.listen(port, () => console.log(`Server started on port ${port}...`))
 }
 app.use(express.static('website')); //host static files like img
