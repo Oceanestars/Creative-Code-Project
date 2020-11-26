@@ -1,10 +1,10 @@
 $l: 1.75em;
 $c: #f90cae #000cae;
-$n: 5; // number of blocks
+$n: 9; // number of blocks
 $t: 1s;
 
-html { overflow: hidden; }
-body { background: #000; }
+// html { overflow: hidden; }
+// body { background: #000; }
 
 div, :before, :after {
 	position: absolute;
@@ -45,7 +45,15 @@ div, :before, :after {
 		filter: brightness(1.6);
 	}
 }
-#button1, #button2{
-  background: black;
+// #button1, #button2{
+//   background: black;
+// }
+.cssAnimation[style*="hidden"]{
+	position: absolute;
+  top: 50%;
+	left: 50%;
+  // transform: translateY(-50%);
+//   visibility: hidden;
 }
+
 @keyframes s { to { transform: scaleY(8); } }

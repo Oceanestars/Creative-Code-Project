@@ -3,7 +3,10 @@ let stats = [];
 let table = document.querySelector("table");
 var numberShapes = 0;
 var p5Drawing = document.getElementById("drawing");
-var cssAnim = document.querySelector(".block");
+var cssAnim = document.querySelector(".cssAnimation");
+var redColor = 0;
+var greenColor = 0;
+var blueColor = 0;
 //tried visibility instead of display because of here:https://stackoverflow.com/questions/64461290/cannot-read-property-addeventlistener-of-null-when-i-move-to-other-page-in-the
 document.getElementById("button1").addEventListener("click", function() {
   p5Drawing.style.visibility = "visible";
@@ -13,6 +16,10 @@ document.getElementById("button1").addEventListener("click", function() {
 document.getElementById("button2").addEventListener("click", function() {
   p5Drawing.style.visibility = "hidden";
   cssAnim.style.visibility = "visible";
+  for(i = 0; i < numberShapes; i++) {
+    cssAnim.innerHTML += '<div class="block"><div class="vis"></div></div>';
+  }
+
 });
 function setup() {
   var firebaseConfig = {
@@ -51,6 +58,7 @@ function gotData(data) {
     tempDict["sleep"] = theHours;
     stats.push(tempDict);
     setMoodToNum(stats[0].activity);
+    setSleeptoColor(stats[0].sleep);
     printShape();
     // Print out the latets entry in the database
     var li = createElement('li', theActivity + ' and ' + theHours);
@@ -67,6 +75,23 @@ function setMoodToNum(currentMood) {
     numberShapes = 7;
   } else {
     numberShapes = 9;
+  }
+}
+function setSleeptoColor(currentSleep){
+  if (currentSleep == 4){
+    redColor = 0;
+    greenColor = 0;
+    blueColor = 0;
+  }
+  else if (currentSleep == 7){
+    redColor = 0;
+    greenColor = 71;
+    blueColor = 171;
+  }
+  else if (currentSleep == 10){
+    redColor = 218;
+    greenColor = 165;
+    blueColor = 32;
   }
 }
 
@@ -104,7 +129,7 @@ class Shape {
 
   setColor() {
     //console.log(this.transparencyColor);
-    fill(255, 0, 0, this.transparencyColor);
+    fill(redColor, greenColor, blueColor, this.transparencyColor);
   }
 
   display() {

@@ -1,11 +1,3 @@
-/*html {
-  overflow: hidden;
-}
-
-body {
-  background: #000;
-}*/
-
 div, :before, :after {
   position: absolute;
   transform-style: preserve-3d;
@@ -18,39 +10,67 @@ div, :before, :after {
   transform: rotateX(-35deg) rotateY(-45deg);
 }
 .block:nth-child(1) {
-  margin-left: -8.75em;
+  margin-left: -17.5em;
   color: #f90cae;
 }
 .block:nth-child(1) .vis {
   animation-delay: 0s;
 }
 .block:nth-child(2) {
-  margin-left: -4.375em;
-  color: #bb0cae;
+  margin-left: -13.125em;
+  color: #da0cae;
 }
 .block:nth-child(2) .vis {
-  animation-delay: -0.3s;
+  animation-delay: -0.1666666667s;
 }
 .block:nth-child(3) {
+  margin-left: -8.75em;
+  color: #bb0cae;
+}
+.block:nth-child(3) .vis {
+  animation-delay: -0.3333333333s;
+}
+.block:nth-child(4) {
+  margin-left: -4.375em;
+  color: #9c0cae;
+}
+.block:nth-child(4) .vis {
+  animation-delay: -0.5s;
+}
+.block:nth-child(5) {
   margin-left: 0em;
   color: #7d0cae;
 }
-.block:nth-child(3) .vis {
-  animation-delay: -0.6s;
+.block:nth-child(5) .vis {
+  animation-delay: -0.6666666667s;
 }
-.block:nth-child(4) {
+.block:nth-child(6) {
   margin-left: 4.375em;
+  color: #5d0cae;
+}
+.block:nth-child(6) .vis {
+  animation-delay: -0.8333333333s;
+}
+.block:nth-child(7) {
+  margin-left: 8.75em;
   color: #3e0cae;
 }
-.block:nth-child(4) .vis {
-  animation-delay: -0.9s;
+.block:nth-child(7) .vis {
+  animation-delay: -1s;
 }
-.block:nth-child(5) {
-  margin-left: 8.75em;
+.block:nth-child(8) {
+  margin-left: 13.125em;
+  color: #1f0cae;
+}
+.block:nth-child(8) .vis {
+  animation-delay: -1.1666666667s;
+}
+.block:nth-child(9) {
+  margin-left: 17.5em;
   color: #000cae;
 }
-.block:nth-child(5) .vis {
-  animation-delay: -1.2s;
+.block:nth-child(9) .vis {
+  animation-delay: -1.3333333333s;
 }
 
 .vis {
@@ -70,11 +90,11 @@ div, :before, :after {
   filter: brightness(1.6);
 }
 
-/*#button1, #button2 {
-  background: black;
-}*/
-.block{
-  visibility: hidden;
+.cssAnimation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /*transform: translateY(-50%);*/
 }
 
 @keyframes s {
