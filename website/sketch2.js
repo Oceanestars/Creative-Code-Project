@@ -14,10 +14,11 @@ document.getElementById("button1").addEventListener("click", function() {
 });
 
 document.getElementById("button2").addEventListener("click", function() {
+cssAnim.innerHTML = '';
   p5Drawing.style.visibility = "hidden";
   cssAnim.style.visibility = "visible";
   for(i = 0; i < numberShapes; i++) {
-    cssAnim.innerHTML += '<div class="block"><div class="vis"></div></div>';
+    cssAnim.innerHTML += '<section class="block"><section class="vis"></section></section>';
   }
 
 });
@@ -161,7 +162,7 @@ let numShapes = 0;
 
 function draw() {
   background(255)
-  translate(100, 20);
+  translate(40, 20);
   ellipseMode(CENTER);
   rectMode(CENTER);
 

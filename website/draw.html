@@ -18,23 +18,61 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@300&family=Comfortaa:wght@500&family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style/cssanimation.css">
   <meta charset="utf-8" />
 
 </head>
 
 <body>
-
-  <div id="drawing"></div>
-
-<div class="cssAnimation"></div>
-
-  <button id="button1" class="button is-success">P5</button>
-  <button id="button2" class="button is-danger ">Css</button>
-  <p>
+  <div class="mainColumn">
+    <div class="mainColumn " id="drawing"></div>
+    <section class="cssAnimation "></section>
+    <div class="buttonGroup mainColumn">
+      <button id="button1" class="button is-success" style="margin-right: 20px;">P5</button>
+      <button id="button2" class="button is-danger ">CSS</button>
+    </div>
+    <!-- <p>
     <ol id="displayList">
     </ol>
-  </p>
+  </p> -->
+    <div class="card ">
+      <h1 class="two" style=" font-size: 30px; margin-top: 30px; margin-bottom:30px;"><span>Legend</span></h1>
+      <p></p>
+      <p id="legend" style=" font-size: 20px;">
+        <div class="grid-container">
+          <div class="item" style=" font-size: 20px;">Shapes:</div>
+          <div class="item1"><img src="img/sadface.svg">
+            <div>3 shapes</div>
+          </div>
+          <div class="item1"> <img src="img/neutralface.svg">
+            <div>6 shapes</div>
+          </div>
+          <div class="item1"><img src="img/happyface.svg">
+            <div>9 shapes</div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="grid-container">
+          <div class="item" style=" font-size: 20px;">Colors:</div>
+          <div class="item1">
+            <div class="square zero"></div>
+            <div>Little sleep</div>
+          </div>
+          <div class="item1">
+            <div class="square first"></div>
+            <div>Some sleep</div>
+          </div>
+          <div class="item1">
+            <div class="square second"></div>
+            <div>Good sleep</div>
+          </div>
+        </div>
+      </p>
+    </div>
+  </div>
 </body>
 <script src="sketch2.js"></script>
 
