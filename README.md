@@ -1,5 +1,6 @@
 # Project Description
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![Build Status](https://travis-ci.com/Oceanestars/Creative-Code-Project.svg?branch=master)](https://travis-ci.com/Oceanestars/Creative-Code-Project)
 
 I want to create a website where people can log in how they feel and that data will be stored in a database
 and then I would use that data to create some art piece that reflects the answer.
@@ -30,6 +31,7 @@ nodemon server.js   // you can also just use npm server.js
   * P5.js - Javascript Library
   * Bulma - CSS Framework
   * SASS - CSS Extension
+  * Travis CI - Continuous Integration
 
 # To do
  * Create multiple checkup questions
