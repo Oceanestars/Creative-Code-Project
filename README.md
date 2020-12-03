@@ -49,4 +49,7 @@ nodemon server.js   // you can also just use npm server.js
  * https://codepen.io/thebabydino/pen/NNxMaN
  * https://flaviocopes.com/css-animations/
  * https://www.youtube.com/watch?v=Zz6eOVaaelI
- * https://codepen.io/impressivewebs/pen/mdbZKKq 
+ * https://codepen.io/impressivewebs/pen/mdbZKKq
+ * https://codepen.io/kececi/pen/Vwexepw
+ * https://stackoverflow.com/questions/18340057/how-to-display-two-buttons-beside-each-other
+ * https://stackoverflow.com/questions/15719729/i-want-to-load-another-html-page-after-a-specific-amount-of-time

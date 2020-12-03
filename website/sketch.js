@@ -80,3 +80,25 @@ function changeStep(btn) {
 function errData(err) {
   console.log(err);
 }
+
+function loggingIn() {
+  console.log("Logging In");
+  var email = document.getElementById("emailVal").value;
+  var password = document.getElementById("passVal").value;
+  console.log("Email: ", email, " Password: ", password);
+  questionPage()
+}
+
+function signingUp() {
+  console.log("Signing Up");
+  var email = document.getElementById("emailVal").value;
+  var password = document.getElementById("passVal").value;
+  console.log("Email: ", email, " Password: ", password);
+  questionPage()
+}
+
+function questionPage(){
+  setTimeout(function() {
+    window.location.href = 'http://localhost:3000/';
+  }, 2000);
+}
