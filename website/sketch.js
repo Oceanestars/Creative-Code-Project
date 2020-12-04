@@ -82,23 +82,40 @@ function errData(err) {
 }
 
 function loggingIn() {
+  var notyf = new Notyf();
   console.log("Logging In");
   var email = document.getElementById("emailVal").value;
   var password = document.getElementById("passVal").value;
   console.log("Email: ", email, " Password: ", password);
-  questionPage()
+  const promise = firebase.auth().signInWithEmailAndPassword(email, password);
+
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) { // User is signed in.
+      notyf.success('Logged in successfully');
+      questionPage()
+    } else {
+      promise.catch(e => alert(e.message));
+    }
+  });
 }
 
 function signingUp() {
+  var notyf = new Notyf();
   console.log("Signing Up");
   var email = document.getElementById("emailVal").value;
   var password = document.getElementById("passVal").value;
   console.log("Email: ", email, " Password: ", password);
-  questionPage()
+  const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
+  promise.then(function(data) {
+    notyf.success('You successfully created an account!');
+  }, function(error) {
+    alert(error.message);
+  });
 }
 
-function questionPage(){
+function questionPage() {
   setTimeout(function() {
-    window.location.href = 'http://localhost:3000/';
+    window.location.href = 'http://localhost:3000/form.html';
   }, 2000);
 }

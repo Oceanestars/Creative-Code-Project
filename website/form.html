@@ -1,0 +1,80 @@
+<!-- emoticon by Igé Maulana from the Noun Project -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="p5.js"></script>
+  <!-- <script src="p5.sound.min.js"></script> -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+
+
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <meta charset="utf-8">
+  <script>
+    $(document).ready(function() {
+        $('.ShowUp').hide().delay(1300).fadeIn(2200);
+  });
+      </script>
+
+</head>
+<body>
+  <!-- <video id="video" width="720" height="560" autoplay muted></video> -->
+  <!-- Question 1 -->
+  <div class="step question-1 active">
+    <div class="container">
+      <h1 class="headercontainer">How are you today?</h1>
+    </div>
+    <div class="ShowUp">
+      <div class="row">
+        <div class="column"><input type="image" src="img/happyface.svg" width="100" height="100" onclick="setMood('happy')" /></div>
+        <div class="column"><input type="image" src="img/neutralface.svg" width="100" height="100" onclick="setMood('neutral')" /></div>
+        <div class="column"><input type="image" src="img/sadface.svg" width="100" height="100" onclick="setMood('sad')" /></div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="container-2">
+        <div class="btn btn-two next-btn" type="button">
+          <span>Next</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="step question-2">
+    <div class="container">
+      <h1 class="headercontainer">How many hours did you sleep?</h1>
+    </div>
+    <br>
+    <div class="row2">
+      <div class="column">
+        <div class="btn-normal" onclick="setSleep(10)"><span>More than 8 hours</span></div>
+      </div>
+      <div class="column">
+        <div class="btn-normal" onclick="setSleep(7)"><span>Between 6 and 8 hours</span></div>
+      </div>
+      <div class="column">
+        <div class="btn-normal" onclick="setSleep(4)"><span>Less than 6 hours</span></div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container-2">
+      <div class="btn btn-two" type="button" onclick="Submit()">
+        <span>Next</span>
+      </div>
+    </div>
+  </div>
+</body>
+  <script src="sketch.js"></script>
+</html>

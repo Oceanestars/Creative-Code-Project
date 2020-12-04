@@ -22,16 +22,17 @@ nodemon server.js   // you can also just use npm server.js
 
 
 # Tools
-  * npm - node package manager
-  * Node.js - open source, cross-platform runtime environment for developing server-side applications
-  * Express - web framework for node
+  * npm - Node package manager
+  * Node.js - Open source, cross-platform runtime environment for developing server-side applications
+  * Express - Web framework for node
   * Nodemon - Automatically refresh my server
-  * Firebase - database as a service
+  * Firebase - Database as a service
   * Jquery - Javascript Library
   * P5.js - Javascript Library
   * Bulma - CSS Framework
   * SASS - CSS Extension
   * Travis CI - Continuous Integration
+  * Notyf.js - Javascript Library
 
 # To do
  * Create multiple checkup questions
@@ -53,3 +54,6 @@ nodemon server.js   // you can also just use npm server.js
  * https://codepen.io/kececi/pen/Vwexepw
  * https://stackoverflow.com/questions/18340057/how-to-display-two-buttons-beside-each-other
  * https://stackoverflow.com/questions/15719729/i-want-to-load-another-html-page-after-a-specific-amount-of-time
+ * https://www.youtube.com/watch?v=fpOBwg0jdGk
+ * https://firebase.google.com/docs/auth/web/email-link-auth?authuser=1
+ * https://github.com/caroso1222/notyf
