@@ -36,10 +36,12 @@ function setup() {
   //     console.log("Remove failed: " + error.message)
   //   });
 
-  dataMessage = firebase.database().ref('PersonData');
+  // dataMessage = firebase.database().ref('PersonData');
 }
 
 function writeUserData(activity, hours) {
+  var userId = firebase.auth().currentUser.uid;
+  dataMessage = firebase.database().ref('Users/' + userId + '/Data');
   let newdataMessage = dataMessage.push();
   newdataMessage.set({
     funactivity: activity,
@@ -86,18 +88,17 @@ function loggingIn() {
   console.log("Logging In");
   var email = document.getElementById("emailVal").value;
   var password = document.getElementById("passVal").value;
-  console.log("Email: ", email, " Password: ", password);
+  //var name = document.getElementById("nameVal").value;
+  //console.log("Email: ", email, " Password: ", password);
   const promise = firebase.auth().signInWithEmailAndPassword(email, password);
-
-
+  promise.then(function(data) {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) { // User is signed in.
       notyf.success('Logged in successfully');
       questionPage()
-    } else {
-      promise.catch(e => alert(e.message));
     }
   });
+},function(error) {promise.catch(e => alert(e.message));});
 }
 
 function signingUp() {
@@ -105,17 +106,50 @@ function signingUp() {
   console.log("Signing Up");
   var email = document.getElementById("emailVal").value;
   var password = document.getElementById("passVal").value;
-  console.log("Email: ", email, " Password: ", password);
-  const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-  promise.then(function(data) {
-    notyf.success('You successfully created an account!');
-  }, function(error) {
-    alert(error.message);
+  var name = document.getElementById("nameVal").value;
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(function(result) {
+      notyf.success('You successfully created an account!');
+      //print("User ", user)
+      return result.user.updateProfile({
+        displayName: name
+      })
+
+    }).catch(function(error) {
+      console.log(error);
+    });
+  //var user = firebase.auth().currentUser;
+  // console.log("Email: ", email, " Password: ", password);
+  // const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
+  // promise.then(function(data) {
+  // notyf.success('You successfully created an account!');
+  // }, function(error) {
+  //   alert(error.message);
+  // });
+  setTimeout(function() {
+  var freakinListener = false;
+  firebase.auth().onAuthStateChanged(function(user) {
+    print("WHYAREYOUHERE")
+    print("User ", user)
+    print("Get displayName", user['displayName']);
+    if (user) {
+      //freakinListener = true;
+      firebase.database().ref('Users/' + user.uid).set({
+        email: user.email,
+        uid: user.uid,
+        displayName: user['displayName']
+      });
+    }
   });
+  // else {
+  //    alert("Wrong format for your email");
+  // }
+}, 5000);
 }
 
 function questionPage() {
   setTimeout(function() {
     window.location.href = 'http://localhost:3000/form.html';
+    //window.location.href = 'https://solace-project.herokuapp.com/form.html';
   }, 2000);
 }

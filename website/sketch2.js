@@ -4,6 +4,7 @@ let table = document.querySelector("table");
 var numberShapes = 0;
 var p5Drawing = document.getElementById("drawing");
 var cssAnim = document.querySelector(".cssAnimation");
+var myDropdown = document.getElementById("myDropdown");
 var redColor = 0;
 var greenColor = 0;
 var blueColor = 0;
@@ -37,36 +38,46 @@ function setup() {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-  dataMessage = firebase.database().ref('PersonData');
-  RetrieveData()
+  dataMessage = firebase.database().ref('User/');
+  //RetrieveData()
 
   canvas = createCanvas(500, 500);
   canvas.parent('drawing')
 }
 
-function RetrieveData() {
-  dataMessage.on('value', gotData, errData);
-}
+// function RetrieveData() {
+//   dataMessage.on('value', gotData, errData);
+// }
+function gotData(position) {
+  // var tempDict = {}
+  var firebaseData = firebase.database().ref('Users');
+  firebaseData.on('value', (data) => {
+    try {
+      var dataRetrieved = data.val();
+      var keys = Object.keys(dataRetrieved);
+      var value = Object.values(dataRetrieved);
+      var keyofvalue = Object.values(value[position].Data);
 
-function gotData(data) {
-  var tempDict = {}
-  try {
-    var dataRetrieved = data.val();
-    var keys = Object.keys(dataRetrieved);
-    var theActivity = dataRetrieved[keys[keys.length - 1]].funactivity; //with multiple entry keys has all the keys so the length-1 grabs me the latest entry
-    var theHours = dataRetrieved[keys[keys.length - 1]].sleep;;
-    tempDict["activity"] = theActivity;
-    tempDict["sleep"] = theHours;
-    stats.push(tempDict);
-    setMoodToNum(stats[0].activity);
-    setSleeptoColor(stats[0].sleep);
-    printShape();
-    // Print out the latets entry in the database
-    var li = createElement('li', theActivity + ' and ' + theHours);
-    li.parent('displayList');
-  } catch (err) {
-    console.log(err.message);
-  }
+      print("value ", value);
+      print("Dataretrieved", dataRetrieved);
+      print("keys", keys);
+      print("keyofvalue: ", keyofvalue[0].sleep);
+      var theActivity = keyofvalue[0].funactivity; //with multiple entry keys has all the keys so the length-1 grabs me the latest entry
+      var theHours = keyofvalue[0].sleep;
+      print("Activity and hours", theActivity, theHours);
+      // tempDict["activity"] = theActivity;
+      // tempDict["sleep"] = theHours;
+      // stats.push(tempDict);
+      // print("stat ",stats);
+      setMoodToNum(theActivity);
+      setSleeptoColor(theHours);
+      printShape();
+      // stats= [];
+      // tempDict = {};
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
 }
 
 function setMoodToNum(currentMood) {
@@ -172,3 +183,37 @@ function draw() {
 
   }
 }
+
+function Dropdown() {
+  var starCountRef = firebase.database().ref('Users');
+  //console.log("starCountRef ", starCountRef);
+starCountRef.on('value', (snapshot) =>{
+  const data = snapshot.val();
+  var count = Object.keys(data).length;
+  //console.log(data);
+
+  var keys = Object.keys(data);
+  //console.log("keys: ",keys);
+for(i = 0; i < Object.keys(data).length; i++) {
+   //console.log("USER: ", data[keys[i]].displayName);
+  myDropdown.innerHTML +='<a onclick="gotData('+ i +')">'+data[keys[i]].displayName+'</a>'
+
+ }
+});
+
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+// window.onclick = function(event) {
+//   if (!event.target.matches('.dropbtn')) {
+//     var dropdowns = document.getElementsByClassName("dropdown-content");
+//     var i;
+//     for (i = 0; i < dropdowns.length; i++) {
+//       var openDropdown = dropdowns[i];
+//       if (openDropdown.classList.contains('show')) {
+//         openDropdown.classList.remove('show');
+//       }
+//     }
+//   }
+// }

@@ -57,3 +57,8 @@ nodemon server.js   // you can also just use npm server.js
  * https://www.youtube.com/watch?v=fpOBwg0jdGk
  * https://firebase.google.com/docs/auth/web/email-link-auth?authuser=1
  * https://github.com/caroso1222/notyf
+ * https://dribbble.com/shots/9169131-Mood-Tracker-Employee-Engagement-App
+ * https://codepen.io/sosuke/pen/Pjoqqp
+ * https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element
+ * https://stackoverflow.com/questions/43509021/how-to-add-username-with-email-and-password-in-firebase
+ * https://www.w3schools.com/howto/howto_js_dropdown.asp

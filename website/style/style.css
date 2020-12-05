@@ -47,17 +47,23 @@ div[class*=container] {
 
 .container-2 { background: #CBE1EF; margin-top: 50px;}
 .btn {
+
   cursor: pointer;
   position: relative;
-  color: white;
+  font-weight:bold;
+  color: black;
   width: 256px;
   height: 64px;
   line-height: 64px;
   transition: all 0.3s;
-  span {
-    transition: all 0.3s;
-    tranform: scale(1, 1);
-  }
+
+}
+span {
+  transition: all 0.3s;
+  tranform: scale(1, 1);
+  z-index: 10;
+  position: relative;
+
 }
 
 .btn::before, .btn::after {
@@ -69,6 +75,7 @@ div[class*=container] {
   width: 100%;
   height: 100%;
   z-index: 1;
+  background-color: grey;
 }
 
 
@@ -82,7 +89,9 @@ div[class*=container] {
 	left: 0;
 	z-index: 1;
   transition: all 0.3s;
-  border: 3px solid rgba(255, 255, 255, 0.5);
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  /*color: black;
+  background-color: grey;*/
 }
 
 .btn-two:hover::after {
@@ -117,7 +126,7 @@ div[class*=container] {
   margin-left: 30%;
   margin-right: 30%;
 
-  color: white;
+  color: black;
   width: 210px;
   height: 64px;
   line-height: 64px;
@@ -134,4 +143,21 @@ div[class*=container] {
 }
 .step.active {
   display: block;
+}
+/*.nextButton{
+  color: black;
+  font-weight:bold;
+  z-index: 10;
+  position: relative;
+}*/
+
+.SadHover:hover{
+  filter: invert(60%) sepia(38%) saturate(544%) hue-rotate(305deg) brightness(100%) contrast(88%);
+
+}
+.NeutralHover:hover{
+  filter: invert(84%) sepia(8%) saturate(1773%) hue-rotate(158deg) brightness(101%) contrast(98%);
+}
+.HappyHover:hover{
+  filter: invert(78%) sepia(39%) saturate(336%) hue-rotate(10deg) brightness(104%) contrast(103%);
 }
