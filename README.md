@@ -34,14 +34,18 @@ nodemon server.js   // you can also just use npm server.js
   * Travis CI - Continuous Integration
   * Notyf.js - Javascript Library
 
-# To do
- * Create multiple checkup questions
- * Create art based on data
- * Create a legend
- * Deploy local server
- * Stretch goal:
-      - Saving user's session
-      - Multiple people can do it at once
+# Features
+ * Created multiple checkup questions
+ * Created art based on data
+   - Used P5.js and css animation
+ * Created a legend
+ * Deployed on Heroku
+ * Installed Travis CI to test my build
+ * Firebase
+   - Read and write from database
+   - Log in and sign up
+   - Send email verification when account is created
+   - Ability to reset password
 
 # Credit
  * https://dev.to/desoga/connect-registration-form-to-firebase-part-2-53cb
