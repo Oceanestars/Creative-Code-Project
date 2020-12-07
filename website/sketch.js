@@ -1,20 +1,45 @@
-var theMood = "";
-var theSleep = 0;
 let dataMessage;
-const nextBtn = document.querySelectorAll(".next-btn");
-const steps = Array.from(document.querySelectorAll(".step"));
-nextBtn.forEach((button) => {
-  button.addEventListener("click", () => {
-    console.log("Clicked next button");
-    changeStep("next");
-  });
+let table = document.querySelector("table");
+let shapesArray = [];
+let isGrowing = true;
+var buttonBoolean = null;
+var changeOpacity = 10;
+var numberShapes = 0;
+var p5Drawing = document.getElementById("drawing");
+var cssAnim = document.querySelector(".cssAnimation");
+var myDropdown = document.getElementById("myDropdown");
+var redColor = 0;
+var greenColor = 0;
+var blueColor = 0;
+var tryVal = "#000000"
+var blackArray = ["#B2B3B5", "#959698", "#777A7C", "#5A5D60", "#3C4044", "#303438", "#1F2327", "#191D22", "#01060B"];
+var blueArray = ["#33FFF8", "#2DE8F8", "#27D1F8", "#21BAF8", "#1BA4F8", "#148DF7", "#0E76F7", "#085FF7", "#0248F7"];
+var yellowArray = ["#FF9100", "#FE9D00", "#FDAA01", "#FCB601", "#FBC201", "#FACE01", "#F9DB02", "#F8E702", "#F7F302"];
+
+document.getElementById("button1").addEventListener("click", function() {
+  p5Drawing.style.visibility = "visible";
+  cssAnim.style.visibility = "hidden";
 });
 
+document.getElementById("button2").addEventListener("click", function() {
+  cssAnim.innerHTML = '';
+  p5Drawing.style.visibility = "hidden";
+  cssAnim.style.visibility = "visible";
+  for (i = 0; i < numberShapes; i++) {
+    // black no Sleep , blue 7, yellow is 10 (R>G)
+    console.log(numberShapes);
+    console.log(redColor, greenColor, blueColor);
 
-$(".close").click(function(){
-	$("#modal").css("display","none");
+    if (greenColor == 0) {
+      redColor = 10 * i;
+      cssAnim.innerHTML += '<section class="block" style="color:' + blackArray[i] + ';"><section class="vis"></section></section>';
+    } else if (redColor > greenColor) {
+      cssAnim.innerHTML += '<section class="block" style="color:' + yellowArray[i] + ';"><section class="vis"></section></section>';
+    } else {
+      cssAnim.innerHTML += '<section class="block" style="color:' + blueArray[i] + ';"><section class="vis"></section></section>';
+    }
+  }
 });
-
 
 function setup() {
   var firebaseConfig = {
@@ -31,154 +56,124 @@ function setup() {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-
-  // Remove data inside database , Keep commented to retrieve data(fast way to delete instead of manually doing it)
-  // var adaRef = firebase.database().ref('Users');
-  // adaRef.remove()
-  //   .then(function() {
-  //     console.log("Remove succeeded.")
-  //   })
-  //   .catch(function(error) {
-  //     console.log("Remove failed: " + error.message)
-  //   });
-
+  dataMessage = firebase.database().ref('User/');
+  canvas = createCanvas(500, 500);
+  canvas.parent('drawing')
 }
 
-function Try() {
-  var notyf = new Notyf();
-  var emailAddress = document.getElementById("emailVal").value;
-  var auth = firebase.auth();
-  auth.sendPasswordResetEmail(emailAddress).then(function() {
-    notyf.success('An email was sent to your email.');
-  }).catch(function(error) {
-    // An error happened.
-    console.log("Wrong email or email dis not in database");
+function gotData(position) {
+  var firebaseData = firebase.database().ref('Users');
+  firebaseData.on('value', (data) => {
+    try {
+      var dataRetrieved = data.val();
+      var keys = Object.keys(dataRetrieved);
+      var value = Object.values(dataRetrieved);
+      var keyofvalue = Object.values(value[position].Data);
+      var lenghtData = Object.keys(keyofvalue).length;
+      var theActivity = keyofvalue[lenghtData - 1].funactivity;
+      var theHours = keyofvalue[lenghtData - 1].sleep;
+      setMoodToNum(theActivity);
+      setSleeptoColor(theHours);
+      printShape();
+    } catch (err) {
+      console.log(err.message);
+    }
   });
 }
 
-function writeUserData(activity, hours) {
-  var userId = firebase.auth().currentUser.uid;
-  dataMessage = firebase.database().ref('Users/' + userId + '/Data');
-  let newdataMessage = dataMessage.push();
-  newdataMessage.set({
-    funactivity: activity,
-    sleep: hours
-  });
-}
-
-function setMood(mood) {
-  theMood = mood;
-  console.log(theMood);
-}
-
-function setSleep(sleep) {
-  theSleep = sleep;
-  console.log(theSleep);
-}
-
-function Submit() {
-  console.log("In Submit function");
-  $("#modal").css("display","block");
-  formSubmit();
-}
-
-function formSubmit() {
-  writeUserData(theMood, theSleep);
-}
-
-function changeStep(btn) {
-  let index = 0;
-  const active = document.querySelector(".active");
-  index = steps.indexOf(active);
-  steps[index].classList.remove("active");
-  if (btn === "next") {
-    index++;
+function setMoodToNum(currentMood) {
+  if (currentMood == "sad") {
+    numberShapes = 5;
+  } else if (currentMood == "neutral") {
+    numberShapes = 7;
+  } else {
+    numberShapes = 9;
   }
-  steps[index].classList.add("active");
 }
 
-function errData(err) {
-  console.log(err);
+function setSleeptoColor(currentSleep) {
+  if (currentSleep == 4) {
+    redColor = 0;
+    greenColor = 0;
+    blueColor = 0;
+  } else if (currentSleep == 7) {
+    redColor = 0;
+    greenColor = 71;
+    blueColor = 171;
+  } else if (currentSleep == 10) {
+    redColor = 218;
+    greenColor = 165;
+    blueColor = 32;
+  }
 }
 
-function loggingIn() {
-  var notyf = new Notyf();
-  console.log("Logging In");
-  var email = document.getElementById("emailVal").value;
-  var password = document.getElementById("passVal").value;
-  const promise = firebase.auth().signInWithEmailAndPassword(email, password);
-  promise.then(function(data) {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user && user.emailVerified == true) { // User is signed in.
-        notyf.success('Logged in successfully');
-        print("User ", user)
-        questionPage()
-      } else {
-        notyf.error('you need to verify your email');
+function printShape() {
+  for (let i = 0; i < numberShapes; i++) {
+    shapesArray.push(new Shape(i, changeOpacity));
+    changeOpacity += 30;
+  }
+}
+
+class Shape {
+  constructor(vertices, transparencyColor) {
+    this.vertices = vertices;
+    this.transparencyColor = transparencyColor;
+    this.setPosition();
+    this.setColor();
+  }
+
+  setPosition() {
+    this.x = 200;
+    this.y = 200;
+    this.radius = 200;
+  }
+
+  setColor() {
+    fill(redColor, greenColor, blueColor, this.transparencyColor);
+  }
+
+  display() {
+    let segmentRadians = TWO_PI / this.vertices;
+    beginShape();
+    for (let i = 0; i < this.vertices; i++) {
+      let x = sin(i * segmentRadians) * this.radius;
+      let y = cos(i * segmentRadians) * this.radius;
+      vertex(this.x + x, this.y + y);
+
+      if (this.radius > 200) {
+        isGrowing = false;
+      } else if (this.radius < -100) {
+        isGrowing = true;
       }
-    });
-  }, function(error) {
-    promise.catch(e => alert(e.message));
+      if (isGrowing == true) {
+        this.radius += 0.25;
+      } else if (isGrowing == false) {
+        this.radius -= 0.25;
+      }
+    }
+    endShape(CLOSE);
+  }
+}
+
+function draw() {
+  background(255)
+  translate(40, 20);
+  ellipseMode(CENTER);
+  rectMode(CENTER);
+  for (let i = 0; i < shapesArray.length; i++) {
+    shapesArray[i].display();
+  }
+}
+
+function Dropdown() {
+  var starCountRef = firebase.database().ref('Users');
+  starCountRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    myDropdown.innerHTML = "";
+    var keys = Object.keys(data);
+    for (i = 0; i < Object.keys(data).length; i++) {
+      myDropdown.innerHTML += '<a onclick="gotData(' + i + ')">' + data[keys[i]].displayName + '</a>'
+    }
   });
-}
-
-function signingUp() {
-  var notyf = new Notyf();
-  console.log("Signing Up");
-  var email = document.getElementById("emailVal").value;
-  var password = document.getElementById("passVal").value;
-  var name = document.getElementById("nameVal").value;
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(function(result) {
-      notyf.success('You successfully created an account!');
-      // print("User ", user)
-      return result.user.updateProfile({
-        displayName: name
-      })
-
-    }).catch(function(error) {
-      console.log(error);
-    });
-  //var user = firebase.auth().currentUser;
-  // console.log("Email: ", email, " Password: ", password);
-  // const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-  // promise.then(function(data) {
-  // notyf.success('You successfully created an account!');
-  // }, function(error) {
-  //   alert(error.message);
-  // });
-  setTimeout(function() {
-    var freakinListener = false;
-    firebase.auth().onAuthStateChanged(function(user) {
-      print("User ", user)
-      print("Get displayName", user['displayName']);
-      if (user) {
-        //freakinListener = true;
-        firebase.database().ref('Users/' + user.uid).set({
-          email: user.email,
-          uid: user.uid,
-          displayName: user['displayName']
-        });
-
-        user.sendEmailVerification().then(function() {
-          // Email sent.
-          console.log("Verify yyour email");
-        }).catch(function(error) {
-          // An error happened.
-          console.log("this did not work");
-        });
-      }
-    });
-    // else {
-    //    alert("Wrong format for your email");
-    // }
-  }, 5000);
-  // var user = firebase.auth().currentUser;
-}
-
-function questionPage() {
-  setTimeout(function() {
-    window.location.href = 'http://localhost:3000/form.html';
-    //window.location.href = 'https://solace-project.herokuapp.com/form.html';
-  }, 2000);
+  document.getElementById("myDropdown").classList.toggle("show");
 }

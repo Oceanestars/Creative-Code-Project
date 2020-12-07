@@ -118,24 +118,22 @@ section, :before, :after {
 .cssAnimation {
   position: absolute;
   top: 30%;
-  left: 400px;
+  left: 55%;
   text-align: left;
-  /*transform: translateY(-50%);*/
 }
 
 .card {
-  width: 500px;
-  height: 300px;
+  width: 510px;
+  height: 250px;
   box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  /*margin-left:50%;*/
   margin-top: 80px;
+  margin-bottom: 50px;
   background: #EDEDED;
   text-align: center;
 }
 
 h1 {
-  /*   font-family: "Open Sans Condensed", sans-serif; */
   text-align: center;
 }
 
@@ -163,7 +161,7 @@ h1 {
 }
 
 .item1 {
-  grid-template-columns: 20px 90px;
+  grid-template-columns: 20px 95px;
   display: grid;
 }
 
@@ -184,13 +182,12 @@ h1 {
   background: rgb(218, 165, 32);
 }
 
-/*.Group{
-margin-left:20px;
-}*/
 .mainColumn {
   width: 500px;
   background-color: #fff;
   text-align: center;
+  margin-left: auto ;
+  margin-right: auto ;
 }
 
 @keyframes s {

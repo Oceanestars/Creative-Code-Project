@@ -1,15 +1,15 @@
-
-/*https://github.com/kaustubhmenon/animation-library*/
 html, body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #CBE1EF;
 }
+
 .headercontainer {
   width: auto;
   text-align: center;
 }
+
 .container {
   width: auto;
   height: 90px;
@@ -29,7 +29,6 @@ canvas {
   text-align: center;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
@@ -45,26 +44,31 @@ div[class*=container] {
   align-items: center;
 }
 
-.container-2 { background: #CBE1EF; margin-top: 50px;}
-.btn-normal:hover{background:#98A9B3;}
-.btn {
+.container-2 {
+  background: #CBE1EF;
+  margin-top: 50px;
+}
 
+.btn-normal:hover {
+  background: #98A9B3;
+}
+
+.btn {
   cursor: pointer;
   position: relative;
-  font-weight:bold;
+  font-weight: bold;
   color: black;
   width: 256px;
   height: 64px;
   line-height: 64px;
   transition: all 0.3s;
-
 }
+
 span {
   transition: all 0.3s;
   tranform: scale(1, 1);
   z-index: 10;
   position: relative;
-
 }
 
 .btn::before, .btn::after {
@@ -79,60 +83,68 @@ span {
   background-color: grey;
 }
 
-
 /* BTN TWO */
 .btn-two::before, .btn-two::after {
   content: '';
   position: absolute;
   width: 100%;
-	height: 100%;
+  height: 100%;
   bottom: 0;
-	left: 0;
-	z-index: 1;
+  left: 0;
+  z-index: 1;
   transition: all 0.3s;
   border: 3px solid rgba(0, 0, 0, 0.5);
-  /*color: black;
-  background-color: grey;*/
 }
 
 .btn-two:hover::after {
   animation-name: rotatecw;
   animation-duration: 2s;
 }
+
 .btn-two:hover::before {
   animation-name: rotateccw;
   animation-duration: 3s;
 }
+
 .btn-two:hover::after, .btn-two:hover::before {
   left: 96px;
   width: 64px;
-
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
 
 @keyframes rotatecw {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rotateccw {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(-360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
 }
 
-.btn-normal{
+.btn-normal {
   border: 3px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
   margin-left: 30%;
   margin-right: 30%;
-
   color: black;
   width: 210px;
   height: 64px;
   line-height: 64px;
 }
-.row2{
+
+.row2 {
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 50px;
@@ -142,32 +154,71 @@ span {
 .step {
   display: none;
 }
+
 .step.active {
   display: block;
 }
-/*.nextButton{
-  color: black;
-  font-weight:bold;
-  z-index: 10;
-  position: relative;
-}*/
 
-.SadHover:hover{
+.SadHover:hover {
   filter: invert(60%) sepia(38%) saturate(544%) hue-rotate(305deg) brightness(100%) contrast(88%);
-
 }
-.NeutralHover:hover{
+
+.NeutralHover:hover {
   filter: invert(84%) sepia(8%) saturate(1773%) hue-rotate(158deg) brightness(101%) contrast(98%);
 }
-.HappyHover:hover{
+
+.HappyHover:hover {
   filter: invert(78%) sepia(39%) saturate(336%) hue-rotate(10deg) brightness(104%) contrast(103%);
 }
 
 /* modal */
-#modal {position: fixed; left:0; top:0; width: 100%; height: 100%; display: none;   z-index: 10;}
-#modal .modal-bg {background: rgba(0,0,0,0.7); display:flex; align-items: center; justify-content: center; height: 100%; }
-#modal .modal-bg .modal-cont {position:relative; background: #fff; padding: 40px; max-width: 500px; display: inline-block;}
-#modal .modal-bg .modal-cont h2 {font-size: 30px; margin:0;}
-#modal .modal-bg .modal-cont p {font-size: 18px; }
-#modal .modal-bg .modal-cont .close {position: absolute; top: 0; right:0; margin:20px; padding: 10px; background: #000; border-radius: 50%; }
-#modal .modal-bg .modal-cont .close svg {width: 24px; fill: #fff; vertical-align: top;}
+#modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 10;
+}
+
+#modal .modal-bg {
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#modal .modal-bg .modal-cont {
+  position: relative;
+  background: #fff;
+  padding: 40px;
+  max-width: 500px;
+  display: inline-block;
+}
+
+#modal .modal-bg .modal-cont h2 {
+  font-size: 30px;
+  margin: 0;
+}
+
+#modal .modal-bg .modal-cont p {
+  font-size: 18px;
+}
+
+#modal .modal-bg .modal-cont .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  padding: 10px;
+  background: #000;
+  border-radius: 50%;
+}
+
+#modal .modal-bg .modal-cont .close svg {
+  width: 24px;
+  fill: #fff;
+  vertical-align: top;
+}
