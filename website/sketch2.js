@@ -8,6 +8,11 @@ var myDropdown = document.getElementById("myDropdown");
 var redColor = 0;
 var greenColor = 0;
 var blueColor = 0;
+var tryVal = "#000000"
+var blackArray = ["#B2B3B5", "#959698", "#777A7C", "#5A5D60", "#3C4044", "#303438","#1F2327","#191D22", "#01060B"];
+var blueArray = ["#33FFF8", "#2DE8F8", "#27D1F8", "#21BAF8", "#1BA4F8", "#148DF7","#0E76F7","#085FF7", "#0248F7"];
+var yellowArray = ["#FF9100", "#FE9D00", "#FDAA01", "#FCB601", "#FBC201", "#FACE01","#F9DB02","#F8E702", "#F7F302"];
+
 //tried visibility instead of display because of here:https://stackoverflow.com/questions/64461290/cannot-read-property-addeventlistener-of-null-when-i-move-to-other-page-in-the
 document.getElementById("button1").addEventListener("click", function() {
   p5Drawing.style.visibility = "visible";
@@ -19,7 +24,20 @@ cssAnim.innerHTML = '';
   p5Drawing.style.visibility = "hidden";
   cssAnim.style.visibility = "visible";
   for(i = 0; i < numberShapes; i++) {
-    cssAnim.innerHTML += '<section class="block"><section class="vis"></section></section>';
+    // black no Sleep , blue 7, yellow is 10 (R>G)
+    console.log(numberShapes);
+    console.log(redColor, greenColor, blueColor);
+
+    if(greenColor == 0){
+      redColor = 10 * i;
+      cssAnim.innerHTML += '<section class="block" style="color:' + blackArray[i] +';"><section class="vis"></section></section>';
+    }
+    else if(redColor > greenColor){
+      cssAnim.innerHTML += '<section class="block" style="color:' + yellowArray[i] +';"><section class="vis"></section></section>';
+    }
+    else{
+      cssAnim.innerHTML += '<section class="block" style="color:' + blueArray[i] +';"><section class="vis"></section></section>';
+    }
   }
 
 });
@@ -39,15 +57,12 @@ function setup() {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
   dataMessage = firebase.database().ref('User/');
-  //RetrieveData()
 
   canvas = createCanvas(500, 500);
   canvas.parent('drawing')
 }
 
-// function RetrieveData() {
-//   dataMessage.on('value', gotData, errData);
-// }
+
 function gotData(position) {
   // var tempDict = {}
   var firebaseData = firebase.database().ref('Users');
@@ -57,23 +72,12 @@ function gotData(position) {
       var keys = Object.keys(dataRetrieved);
       var value = Object.values(dataRetrieved);
       var keyofvalue = Object.values(value[position].Data);
-
-      print("value ", value);
-      print("Dataretrieved", dataRetrieved);
-      print("keys", keys);
-      print("keyofvalue: ", keyofvalue[0].sleep);
       var theActivity = keyofvalue[0].funactivity; //with multiple entry keys has all the keys so the length-1 grabs me the latest entry
       var theHours = keyofvalue[0].sleep;
-      print("Activity and hours", theActivity, theHours);
-      // tempDict["activity"] = theActivity;
-      // tempDict["sleep"] = theHours;
-      // stats.push(tempDict);
-      // print("stat ",stats);
       setMoodToNum(theActivity);
       setSleeptoColor(theHours);
+      console.log("In got data ",redColor, greenColor, blueColor);
       printShape();
-      // stats= [];
-      // tempDict = {};
     } catch (err) {
       console.log(err.message);
     }
@@ -203,17 +207,3 @@ for(i = 0; i < Object.keys(data).length; i++) {
 
   document.getElementById("myDropdown").classList.toggle("show");
 }
-
-// Close the dropdown if the user clicks outside of it
-// window.onclick = function(event) {
-//   if (!event.target.matches('.dropbtn')) {
-//     var dropdowns = document.getElementsByClassName("dropdown-content");
-//     var i;
-//     for (i = 0; i < dropdowns.length; i++) {
-//       var openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains('show')) {
-//         openDropdown.classList.remove('show');
-//       }
-//     }
-//   }
-// }

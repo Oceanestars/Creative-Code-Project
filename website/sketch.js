@@ -10,6 +10,12 @@ nextBtn.forEach((button) => {
   });
 });
 
+
+$(".close").click(function(){
+	$("#modal").css("display","none");
+});
+
+
 function setup() {
   var firebaseConfig = {
     apiKey: "AIzaSyCQwH6uhCGCSIz_JpL8Twwt3ueBrm5IVng",
@@ -27,7 +33,7 @@ function setup() {
   firebase.analytics();
 
   // Remove data inside database , Keep commented to retrieve data(fast way to delete instead of manually doing it)
-  // var adaRef = firebase.database().ref('PersonData');
+  // var adaRef = firebase.database().ref('Users');
   // adaRef.remove()
   //   .then(function() {
   //     console.log("Remove succeeded.")
@@ -36,7 +42,18 @@ function setup() {
   //     console.log("Remove failed: " + error.message)
   //   });
 
-  // dataMessage = firebase.database().ref('PersonData');
+}
+
+function Try() {
+  var notyf = new Notyf();
+  var emailAddress = document.getElementById("emailVal").value;
+  var auth = firebase.auth();
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+    notyf.success('An email was sent to your email.');
+  }).catch(function(error) {
+    // An error happened.
+    console.log("Wrong email or email dis not in database");
+  });
 }
 
 function writeUserData(activity, hours) {
@@ -61,6 +78,7 @@ function setSleep(sleep) {
 
 function Submit() {
   console.log("In Submit function");
+  $("#modal").css("display","block");
   formSubmit();
 }
 
@@ -88,17 +106,20 @@ function loggingIn() {
   console.log("Logging In");
   var email = document.getElementById("emailVal").value;
   var password = document.getElementById("passVal").value;
-  //var name = document.getElementById("nameVal").value;
-  //console.log("Email: ", email, " Password: ", password);
   const promise = firebase.auth().signInWithEmailAndPassword(email, password);
   promise.then(function(data) {
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) { // User is signed in.
-      notyf.success('Logged in successfully');
-      questionPage()
-    }
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user && user.emailVerified == true) { // User is signed in.
+        notyf.success('Logged in successfully');
+        print("User ", user)
+        questionPage()
+      } else {
+        notyf.error('you need to verify your email');
+      }
+    });
+  }, function(error) {
+    promise.catch(e => alert(e.message));
   });
-},function(error) {promise.catch(e => alert(e.message));});
 }
 
 function signingUp() {
@@ -110,7 +131,7 @@ function signingUp() {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function(result) {
       notyf.success('You successfully created an account!');
-      //print("User ", user)
+      // print("User ", user)
       return result.user.updateProfile({
         displayName: name
       })
@@ -127,24 +148,32 @@ function signingUp() {
   //   alert(error.message);
   // });
   setTimeout(function() {
-  var freakinListener = false;
-  firebase.auth().onAuthStateChanged(function(user) {
-    print("WHYAREYOUHERE")
-    print("User ", user)
-    print("Get displayName", user['displayName']);
-    if (user) {
-      //freakinListener = true;
-      firebase.database().ref('Users/' + user.uid).set({
-        email: user.email,
-        uid: user.uid,
-        displayName: user['displayName']
-      });
-    }
-  });
-  // else {
-  //    alert("Wrong format for your email");
-  // }
-}, 5000);
+    var freakinListener = false;
+    firebase.auth().onAuthStateChanged(function(user) {
+      print("User ", user)
+      print("Get displayName", user['displayName']);
+      if (user) {
+        //freakinListener = true;
+        firebase.database().ref('Users/' + user.uid).set({
+          email: user.email,
+          uid: user.uid,
+          displayName: user['displayName']
+        });
+
+        user.sendEmailVerification().then(function() {
+          // Email sent.
+          console.log("Verify yyour email");
+        }).catch(function(error) {
+          // An error happened.
+          console.log("this did not work");
+        });
+      }
+    });
+    // else {
+    //    alert("Wrong format for your email");
+    // }
+  }, 5000);
+  // var user = firebase.auth().currentUser;
 }
 
 function questionPage() {

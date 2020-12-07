@@ -7,7 +7,7 @@ and then I would use that data to create some art piece that reflects the answer
 Ideally I'd have one webpage where you enter the data and another page where you can see the art piece.
 The reason behind this project is how I want to be connected with my friends.
 But sometimes people are uncomfortable answering the question "How are you?" so I wouldn't see any of their answer except some art piece.
-Strecth goal would be to have people be able to have an account and log in everyday and I could see a different art piece everyday and see how they are progressing. It feels like a less invasive way to check on someone.
+Stretch goal would be to have people be able to have an account and log in everyday and I could see a different art piece everyday and see how they are progressing. It feels like a less invasive way to check on someone.
 Feel free to contribute by forking and doing a pull request :)
 
 # How to run this project
@@ -62,3 +62,5 @@ nodemon server.js   // you can also just use npm server.js
  * https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element
  * https://stackoverflow.com/questions/43509021/how-to-add-username-with-email-and-password-in-firebase
  * https://www.w3schools.com/howto/howto_js_dropdown.asp
+ * https://codepen.io/oceanestars/pen/BaLKgEq
+ * https://firebase.google.com/docs/auth/web/manage-users

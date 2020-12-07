@@ -46,6 +46,7 @@ div[class*=container] {
 }
 
 .container-2 { background: #CBE1EF; margin-top: 50px;}
+.btn-normal:hover{background:#98A9B3;}
 .btn {
 
   cursor: pointer;
@@ -161,3 +162,12 @@ span {
 .HappyHover:hover{
   filter: invert(78%) sepia(39%) saturate(336%) hue-rotate(10deg) brightness(104%) contrast(103%);
 }
+
+/* modal */
+#modal {position: fixed; left:0; top:0; width: 100%; height: 100%; display: none;   z-index: 10;}
+#modal .modal-bg {background: rgba(0,0,0,0.7); display:flex; align-items: center; justify-content: center; height: 100%; }
+#modal .modal-bg .modal-cont {position:relative; background: #fff; padding: 40px; max-width: 500px; display: inline-block;}
+#modal .modal-bg .modal-cont h2 {font-size: 30px; margin:0;}
+#modal .modal-bg .modal-cont p {font-size: 18px; }
+#modal .modal-bg .modal-cont .close {position: absolute; top: 0; right:0; margin:20px; padding: 10px; background: #000; border-radius: 50%; }
+#modal .modal-bg .modal-cont .close svg {width: 24px; fill: #fff; vertical-align: top;}

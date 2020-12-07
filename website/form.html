@@ -11,10 +11,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="style/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" /> -->
 
-
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   <meta charset="utf-8">
   <script>
     $(document).ready(function() {
@@ -24,7 +22,6 @@
 
 </head>
 <body>
-  <!-- <video id="video" width="720" height="560" autoplay muted></video> -->
   <!-- Question 1 -->
   <div class="step question-1 active">
     <div class="container">
@@ -55,7 +52,7 @@
     <br>
     <div class="row2">
       <div class="column">
-        <div class="btn-normal" onclick="setSleep(10)"><span>More than 8 hours</span></div>
+        <div class="btn-normal lotSleep" onclick="setSleep(10)"><span>More than 8 hours</span></div>
       </div>
       <div class="column">
         <div class="btn-normal" onclick="setSleep(7)"><span>Between 6 and 8 hours</span></div>
@@ -69,12 +66,35 @@
     <br>
     <br>
     <br>
+    <div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    </div>
     <div class="container-2">
       <div class="btn btn-two" type="button" onclick="Submit()">
-        <span class="nextButton">Next</span>
+        <span class="nextButton ">Next</span>
       </div>
     </div>
+    </div>
   </div>
+
+  <div id="modal">
+	<div class="modal-bg">
+		<div class="modal-cont">
+			<h2>Thank you for checking-in!</h2>
+			<p>Your well-being matters greatly to me. I'm thankful for your reponse. If you are having a hard time checkout these <a href="https://nndc.org/resource-links/" target="_blank">resources</a>. I hope you have a wonderful day.
+      </p>
+			<a href="https://solace-project.herokuapp.com/" class="close close1">
+				<svg viewBox="0 0 24 24">
+					<path d="M14.1,12L22,4.1c0.6-0.6,0.6-1.5,0-2.1c-0.6-0.6-1.5-0.6-2.1,0L12,9.9L4.1,2C3.5,1.4,2.5,1.4,2,2C1.4,2.5,1.4,3.5,2,4.1
+	L9.9,12L2,19.9c-0.6,0.6-0.6,1.5,0,2.1c0.3,0.3,0.7,0.4,1.1,0.4s0.8-0.1,1.1-0.4l7.9-7.9l7.9,7.9c0.3,0.3,0.7,0.4,1.1,0.4
+	s0.8-0.1,1.1-0.4c0.6-0.6,0.6-1.5,0-2.1L14.1,12z"/>
+</svg>
+			</a>
+		</div>
+	</div>
+</div>
+
 </body>
   <script src="sketch.js"></script>
 </html>
